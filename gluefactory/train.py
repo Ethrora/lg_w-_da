@@ -18,6 +18,9 @@ import torch
 from omegaconf import OmegaConf
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+
 
 from . import __module_name__, logger, settings
 from .datasets import get_dataset
@@ -693,7 +696,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--overfit", action="store_true")
     parser.add_argument("--restore", action="store_true")
-    parser.add_argument("--distributed", action="store_true")
+    parser.add_argument("--distributed", default="True", action="store_true")
     parser.add_argument("--profile", action="store_true")
     parser.add_argument("--print_arch", "--pa", action="store_true")
     parser.add_argument("--detect_anomaly", "--da", action="store_true")

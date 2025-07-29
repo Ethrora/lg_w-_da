@@ -1,0 +1,42 @@
+nohup: ignoring input
+[07/26/2025 10:19:30 gluefactory INFO] Starting experiment sp+lg_megadepth
+[07/26/2025 10:19:32 gluefactory INFO] Will fine-tune from weights of sp+lg_homography
+[07/26/2025 10:19:32 gluefactory INFO] Will fine-tune from weights of sp+lg_homography
+[07/26/2025 10:19:33 gluefactory INFO] Will fine-tune from weights of sp+lg_homography
+W0726 10:19:33.311000 2048811 site-packages/torch/multiprocessing/spawn.py:169] Terminating process 2049077 via signal SIGTERM
+W0726 10:19:33.313000 2048811 site-packages/torch/multiprocessing/spawn.py:169] Terminating process 2049078 via signal SIGTERM
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/yinyucheng/glue-factory/gluefactory/train.py", line 735, in <module>
+    torch.multiprocessing.spawn(
+  File "/home/yinyucheng/anaconda3/envs/glue_factory/lib/python3.12/site-packages/torch/multiprocessing/spawn.py", line 340, in spawn
+    return start_processes(fn, args, nprocs, join, daemon, start_method="spawn")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yinyucheng/anaconda3/envs/glue_factory/lib/python3.12/site-packages/torch/multiprocessing/spawn.py", line 296, in start_processes
+    while not context.join():
+              ^^^^^^^^^^^^^^
+  File "/home/yinyucheng/anaconda3/envs/glue_factory/lib/python3.12/site-packages/torch/multiprocessing/spawn.py", line 215, in join
+    raise ProcessRaisedException(msg, error_index, failed_process.pid)
+torch.multiprocessing.spawn.ProcessRaisedException: 
+
+-- Process 0 terminated with the following error:
+Traceback (most recent call last):
+  File "/home/yinyucheng/anaconda3/envs/glue_factory/lib/python3.12/site-packages/torch/multiprocessing/spawn.py", line 90, in _wrap
+    fn(i, *args)
+  File "/home/yinyucheng/glue-factory/gluefactory/train.py", line 670, in main_worker
+    training(rank, conf, output_dir, args)
+  File "/home/yinyucheng/glue-factory/gluefactory/train.py", line 258, in training
+    init_cp = torch.load(
+              ^^^^^^^^^^^
+  File "/home/yinyucheng/anaconda3/envs/glue_factory/lib/python3.12/site-packages/torch/serialization.py", line 1425, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yinyucheng/anaconda3/envs/glue_factory/lib/python3.12/site-packages/torch/serialization.py", line 751, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yinyucheng/anaconda3/envs/glue_factory/lib/python3.12/site-packages/torch/serialization.py", line 732, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/yinyucheng/glue-factory/outputs/training/sp+lg_homography/checkpoint_best.tar'
+
