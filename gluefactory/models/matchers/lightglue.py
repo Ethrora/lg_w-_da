@@ -15,11 +15,16 @@ from ..utils.metrics import matcher_metrics
 from ..utils.rotary import apply_rotary_emb
 from ..utils.rms_norm import RMSNorm
 
+# --------------train--------------
 # nohup env CUDA_VISIBLE_DEVICES=0,1,2 python -m gluefactory.train sp+lg_da_homography --conf gluefactory/configs/superpoint+lightglue_da_homography.yaml > train.log 2>&1 &
 
 # nohup env CUDA_VISIBLE_DEVICES=0,1,2 python -m gluefactory.train sp+lg_da_megadepth --conf gluefactory/configs/superpoint+lightglue_da_megadepth.yaml train.load_experiment=sp+lg_da_homography > finetune.log 2>&1 &
 # 注：bs=16
+# nohup env CUDA_VISIBLE_DEVICES=0,1,2 python -m gluefactory.train sp+lg_da_megadepth --conf gluefactory/configs/superpoint+lightglue_da_megadepth.yaml --restore > train_resume.log 2>&1 &
 
+# --------------test--------------
+# python -m gluefactory.eval.megadepth1500 --checkpoint sp+lg_da_megadepth
+# python -m gluefactory.eval.hpatches --checkpoint sp+lg_da_megadepth
 
 FLASH_AVAILABLE = hasattr(F, "scaled_dot_product_attention")
 FLASH_AVAILABLE = False
@@ -433,7 +438,7 @@ class LightGlue(nn.Module):
         "add_scale_ori": False,
         "descriptor_dim": 256,
         "n_layers": 9,
-        "num_heads": 4,
+        "num_heads": 2,
         "flash": False,  # enable FlashAttention if available.
         "mp": False,  # enable mixed precision
         "depth_confidence": -1,  # early stopping, disable with -1
